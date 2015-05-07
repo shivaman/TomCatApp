@@ -4,12 +4,12 @@ files:
   - source: hello.war
     destination: /usr/share/tomcat8/webapps/
   - source: common_functions.sh
-    destination: /usr/share/tomcat8/webapps/hello-scripts/common_functions.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: deregister_from_elb.sh
-    destination: /usr/share/tomcat8/webapps/hello-scripts/deregister_from_elb.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: register_with_elb.sh
-    destination: /usr/share/tomcat8/webapps/hello-scripts/register_with_elb.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: start_server.sh
-    destination: /usr/share/tomcat8/webapps/hello-scripts/start_server.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: stop_server.sh
-    destination: /usr/share/tomcat8/webapps/hello-scripts/stop_server.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/
