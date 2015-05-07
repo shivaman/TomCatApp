@@ -7,3 +7,22 @@ files:
     destination: /usr/share/tomcat8/webapps/hello-scripts/common_functions.sh
   - source: deregister_from_elb.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/deregister_from_elb.sh
+  - source: register_with_elb.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/register_with_elb.sh
+  - source: start_server.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/start_server.sh
+  - source: stop_server.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/stop_server.sh
+hooks:
+  BeforeInstall:
+    - location: /usr/share/tomcat8/webapps/hello-scripts/deregister_from_elb.sh
+      timeout: 400
+    - location: /usr/share/tomcat8/webapps/hello-scripts/stop_server.sh
+      timeout: 120
+      runas: root
+  ApplicationStart:
+    - location: /usr/share/tomcat8/webapps/hello-scripts/start_server.sh
+      timeout: 120
+      runas: root
+    - location: /usr/share/tomcat8/webapps/hello-scripts/register_with_elb.sh
+      timeout: 120
