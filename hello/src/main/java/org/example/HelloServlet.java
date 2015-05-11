@@ -20,7 +20,7 @@ public class HelloServlet extends HttpServlet {
          writer.print("<HTML>");
          writer.print("<BODY>");
          writer.print("<H2>");
-         writer.print("Hello World...");
+         writer.print("Hello Universe...");
          //writer.print("Its raining bits...");
          writer.print("</H2>");
          writer.print(" <IMG SRC=\"http://www.cirrusinsight.com/wp-content/uploads/2013/03/cloud3.gif\">");
