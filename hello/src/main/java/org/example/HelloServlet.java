@@ -16,6 +16,11 @@ public class HelloServlet extends HttpServlet {
     {
          // Very simple - just return some plain text
          PrintWriter writer = response.getWriter();
-         writer.print("Hello Swinburne");
+         writer.print("<HTML>");
+         writer.print("<H2>");
+         writer.print("Hello World");
+         writer.print("</H2>");
+         writer.print(" <IMG SRC=\"http://www.cirrusinsight.com/wp-content/uploads/2013/03/cloud3.gif\">");
+         writer.print("</HTML>");
      }
 }
