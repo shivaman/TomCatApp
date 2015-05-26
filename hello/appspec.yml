@@ -17,6 +17,7 @@ hooks:
   BeforeInstall:
     - location: stop_server.sh
     - location: deregister_from_elb.sh
+    runas : root
   AfterInstall:
     - location: start_server.sh
     - location: register_with_elb.sh
