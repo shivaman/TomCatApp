@@ -13,3 +13,10 @@ files:
     destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: stop_server.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/
+hooks:
+  BeforeInstall:
+    - location: stop_server.sh
+    - location: deregister_from_elb.sh
+  AfterInstall:
+    - location: start_server.sh
+    - location: register_with_elb.sh

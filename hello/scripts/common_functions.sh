@@ -169,7 +169,32 @@ autoscaling_exit_standby() {
         msg "Instance is Pending:Wait; nothing to do."
         return 0
     fi
+##########
+    msg "Checking to see if ASG $asg_name will let us increase desired capacity"
+    local min_desired=$($AWS_CLI autoscaling describe-auto-scaling-groups \
+        --auto-scaling-group-name $asg_name \
+        --query 'AutoScalingGroups[0].[MinSize, DesiredCapacity]' \
+        --output text)
 
+    local min_cap=$(echo $min_desired | awk '{print $1}')
+    local desired_cap=$(echo $min_desired | awk '{print $2}')
+
+    if [ -z "$min_cap" -o -z "$desired_cap" ]; then
+        msg "Unable to determine minimum and desired capacity for ASG $asg_name."
+        msg "Attempting to get this instance out of standby regardless."
+    elif [ $min_cap == $desired_cap -a $min_cap -gt 0 ]; then
+        local new_min=$(($min_cap + 1))
+        msg "Incrementing ASG $asg_name's minimum size to $new_min, and desired size to $new_desired"
+        msg $($AWS_CLI autoscaling update-auto-scaling-group \
+            --auto-scaling-group-name $asg_name \
+            --min-size $new_min)
+        if [ $? != 0 ]; then
+            msg "Failed to increase ASG $asg_name's minimum size to $new_min. Cannot get this instance out of Standby."
+            return 1
+        fi
+    fi
+
+    ########
 
     msg "Moving instance $instance_id out of Standby"
     $AWS_CLI autoscaling exit-standby \
