@@ -297,7 +297,7 @@
           "wget -P /var/lib/jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/workflow-aggregator/1.4/workflow-aggregator.hpi\n",
           "wget -P /var/lib/jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/github/1.11/github.hpi\n",
           "wget -P /var/lib/jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/aws -lambda/0.1.5/aws-lambda.hpi\n",
-          "wget -P /var/lib/jenkins/plugins/ https://github.com/awslabs/aws-codepipeline-plugin-for-jenkins/blob/master/dist/aws-codepipeline-plugin-for-jenkins-0.1.hpi\n",
+          "wget -P /var/lib/jenkins/plugins/ https://github.com/awslabs/aws-codepipeline-plugin-for-jenkins/blob/master/dist/aws-codepipeline-plugin-for-jenkins.hpi\n",
           "wget -P /var/lib/jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/slack/1.7/slack.hpi\n",
 
           "chown -R jenkins:jenkins /var/lib/jenkins > /tmp/chown1.log 2>&1\n",

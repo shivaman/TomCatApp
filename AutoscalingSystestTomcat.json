@@ -250,7 +250,7 @@
         "LaunchConfigurationName" : { "Ref" : "LaunchConfig" },
         "MinSize" : "2",
         "MaxSize" : "8",
-        "DesiredCapacity" : "2",
+        "DesiredCapacity" : "4",
         "LoadBalancerNames" : [ { "Ref" : "ElasticLoadBalancer" } ],
         "Tags" : [ 
             {
@@ -485,6 +485,24 @@
       }
     },
 
+    "myDNS" : {
+        "Type" : "AWS::Route53::RecordSetGroup",
+        "Properties" : {
+          "HostedZoneName" : "shivaman.com.",
+          "Comment" : "Zone apex alias targeted to Elastic LoadBalancer.",
+          "RecordSets" : [
+            {
+              "Name" : "codextest.shivaman.com.",
+              "Type" : "A",
+              "AliasTarget" : {
+                  "HostedZoneId" : { "Fn::GetAtt" : ["ElasticLoadBalancer", "CanonicalHostedZoneNameID"] },
+                  "DNSName" : { "Fn::GetAtt" : ["ElasticLoadBalancer","CanonicalHostedZoneName"] }
+              }
+            }
+          ]
+        }
+    },
+    
     "InstanceSecurityGroup" : {
       "Type" : "AWS::EC2::SecurityGroup",
       "Properties" : {
@@ -502,6 +520,41 @@
           "SourceSecurityGroupOwnerId" : {"Fn::GetAtt" : ["ElasticLoadBalancer", "SourceSecurityGroup.OwnerAlias"]},
           "SourceSecurityGroupName" : {"Fn::GetAtt" : ["ElasticLoadBalancer", "SourceSecurityGroup.GroupName"]}
         } ]
+      }
+    },
+
+    "TestTomCodeDeployApplication" : {
+      "Type" : "AWS::CodeDeploy::Application"
+    },
+
+    "FiftyPercentAtATime" : {
+      "Type" : "AWS::CodeDeploy::DeploymentConfig",
+      "Properties" : {
+        "MinimumHealthyHosts" : {
+          "Type" : "FLEET_PERCENT",
+          "Value" : "50"
+        }
+      }
+    },
+
+    "TestTomDeploymentGroup" : {
+      "Type" : "AWS::CodeDeploy::DeploymentGroup",
+      "Properties" : {
+        "ApplicationName" : {"Ref" : "TestTomCodeDeployApplication"},
+        "DeploymentConfigName" : {"Ref" : "FiftyPercentAtATime"},
+        "Ec2TagFilters" : [
+          {
+            "Key" : "Name",
+            "Value" : "TomCat",
+            "Type" : "KEY_AND_VALUE"
+          },
+          {
+            "Key" : "Environment",
+            "Value" : "SysTest",
+            "Type" : "KEY_AND_VALUE"
+          }
+        ],
+        "ServiceRoleArn" : {"Fn::GetAtt" : ["CodeDeployTrustRole", "Arn"] }
       }
     }
   },
