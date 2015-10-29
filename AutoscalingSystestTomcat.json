@@ -219,6 +219,7 @@
                 "autoscaling:ExitStandby",
                 "cloudformation:Describe*",
                 "cloudformation:GetTemplate",
+                "dynamodb:*",
                 "s3:Get*"
               ],
               "Resource": "*"
