@@ -10,10 +10,10 @@ Provides a simple Employee app with a REST API to also be deployed to tomcat tha
 #### Interacting with the EmployeeApi
 ```bash
 # list all contacts, returned in JSON format
-curl -H "Accept:application/json" http://<hostname>/employee/rest/contacts
+curl -H "Accept:application/json" http://<hostname>/apis/employee/rest/contacts
 
 # list all contacts, returned in XML format
-curl http://<hostname>/employee/rest/contacts
+curl http://<hostname>/apis/employee/rest/contacts
 
 # create/update employee contact in JSON format
 curl -X PUT -H "Content-Type:application/json" -H "Accept:application/json" --data '{
@@ -22,7 +22,7 @@ curl -X PUT -H "Content-Type:application/json" -H "Accept:application/json" --da
 	"address": [
 		{ "city": "Melbourne", "street": "Bourke Street"} 
 	]
-    }' http://<hostname>/employee/rest/contacts/fsmith
+    }' http://<hostname>/apis/employee/rest/contacts/fsmith
     
 # create/update employee contact in XML format
 curl -X PUT -H "Content-type:application/xml" --data "<contact>
@@ -32,8 +32,8 @@ curl -X PUT -H "Content-type:application/xml" --data "<contact>
 		<city>Melbourne</city>
 		<street>Bourke Street</street>
 	</address>
-</contact>" http://<hostname>/employee/rest/contacts/fsmith
+</contact>" http://<hostname>/apis/employee/rest/contacts/fsmith
 
 # list specific employee contact, in JSON format
-curl -H "Accept:application/json" http://<hostname>/employee/rest/contacts/fsmith
+curl -H "Accept:application/json" http://<hostname>/apis/employee/rest/contacts/fsmith
 ```
