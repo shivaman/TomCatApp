@@ -21,20 +21,13 @@ public class ContactStore {
 	private static DynamoDBMapper mapper;
 	
 	private ContactStore() {
-		Region apSouteast2 = Region.getRegion(Regions.AP_SOUTHEAST_2);
+		Region apSouteast2 = Region.getRegion(Regions.US_EAST_1);
 		this.dbClient = new AmazonDynamoDBClient();
 		this.dbClient.setRegion(apSouteast2);
 		mapper = new DynamoDBMapper(dbClient);
 		
 		store = new HashMap<String,Contact>();
-//		store = new HashMap<String,Contact>();
-//		{	
-//			@Override
-//			public Object put(Object key, Object vaule) {
-//				this.mapper.save(value);
-//				return super.put(key,value); //To change body of generated methods, choose Tools | Templates.
-//			 }
-//		};		
+			
 	}
 	
 	public static Map<String,Contact> getStore() {
@@ -71,13 +64,7 @@ public class ContactStore {
 		};
 		Contact cHuang = new Contact("huangyim", "Huang Yi Ming", Arrays.asList(addrs));
 		store.put(cHuang.getId(), cHuang);
-		
-		//try {
-			
-			mapper.save(cHuang);
-		//} catch (Exception e) {
-			
-		//}
-	
+
+		mapper.save(cHuang);
 	}
 }
