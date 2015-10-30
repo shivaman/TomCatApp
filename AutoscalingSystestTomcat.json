@@ -538,7 +538,28 @@
       }
     },
 
-    "TestTomDeploymentGroup" : {
+    "WebDeploymentGroup" : {
+      "Type" : "AWS::CodeDeploy::DeploymentGroup",
+      "Properties" : {
+        "ApplicationName" : {"Ref" : "TestTomCodeDeployApplication"},
+        "DeploymentConfigName" : {"Ref" : "FiftyPercentAtATime"},
+        "Ec2TagFilters" : [
+          {
+            "Key" : "Name",
+            "Value" : "TomCat",
+            "Type" : "KEY_AND_VALUE"
+          },
+          {
+            "Key" : "Environment",
+            "Value" : "SysTest",
+            "Type" : "KEY_AND_VALUE"
+          }
+        ],
+        "ServiceRoleArn" : {"Fn::GetAtt" : ["CodeDeployTrustRole", "Arn"] }
+      }
+    },
+    
+    "ApiDeploymentGroup" : {
       "Type" : "AWS::CodeDeploy::DeploymentGroup",
       "Properties" : {
         "ApplicationName" : {"Ref" : "TestTomCodeDeployApplication"},
