@@ -563,7 +563,7 @@
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
         "ProvisionedThroughput": {"ReadCapacityUnits": "1", "WriteCapacityUnits": "1"},
-        "AttributeDefinitions": [{"AttributeName": "hash", "AttributeType": "S"} ],
+        "AttributeDefinitions": [{"AttributeName": "id", "AttributeType": "S"} ],
         "KeySchema": [{"AttributeName": "id", "KeyType": "HASH"}],
         "TableName" : "contact"
       }
