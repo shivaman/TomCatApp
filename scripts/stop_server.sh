@@ -17,4 +17,4 @@ rm -f /usr/share/tomcat8/conf/server.xml
 
 # Remove existing html pages
 rm -rf /usr/share/tomcat8/webapps/hello.war /usr/share/tomcat8/webapps/hello*
-rm -rf /usr/share/tomcat8/webapps/hello.war /usr/share/tomcat8/webapps/api/employee*
+rm -rf /usr/share/tomcat8/webapps/api/employee*
