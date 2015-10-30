@@ -11,15 +11,10 @@ files:
     destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: start_server.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/
-  - source: stop_server.sh
-    destination: /usr/share/tomcat8/webapps/hello-scripts/
-  - source: httpd.conf
-    destination: /etc/httpd/conf/
-  - source: server.xml
-    destination: /usr/share/tomcat8/conf/
+  - source: stop_server_api.sh
 hooks:
   BeforeInstall:
-    - location: stop_server.sh
+    - location: stop_server_api.sh
       runas : root
     - location: deregister_from_elb.sh
   AfterInstall:
