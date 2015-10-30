@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: employee.war
-    destination: /usr/share/tomcat8/webapps/
+    destination: /usr/share/tomcat8/webapps/api/
   - source: common_functions.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: deregister_from_elb.sh
