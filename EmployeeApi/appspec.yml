@@ -16,7 +16,7 @@ files:
   - source: httpd.conf
     destination: /etc/httpd/conf/
   - source: server.xml
-    destination: usr/share/tomcat8/conf/
+    destination: /usr/share/tomcat8/conf/
 hooks:
   BeforeInstall:
     - location: stop_server.sh
