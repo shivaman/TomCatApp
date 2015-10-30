@@ -12,6 +12,7 @@ files:
   - source: start_server.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: stop_server_api.sh
+    destination: /usr/share/tomcat8/webapps/hello-scripts/
 hooks:
   BeforeInstall:
     - location: stop_server_api.sh
