@@ -557,16 +557,16 @@
         ],
         "ServiceRoleArn" : {"Fn::GetAtt" : ["CodeDeployTrustRole", "Arn"] }
       }
-    }
-  },
-  
-  "DdbContactTable": {
-    "Type": "AWS::DynamoDB::Table",
-    "Properties": {
-      "ProvisionedThroughput": {"ReadCapacityUnits": "1", "WriteCapacityUnits": "1"},
-      "AttributeDefinitions": [{"AttributeName": "hash", "AttributeType": "S"} ],
-      "KeySchema": [{"AttributeName": "id", "KeyType": "HASH"}],
-      "TableName" : "contact"
+    },
+    
+    "DdbContactTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "ProvisionedThroughput": {"ReadCapacityUnits": "1", "WriteCapacityUnits": "1"},
+        "AttributeDefinitions": [{"AttributeName": "hash", "AttributeType": "S"} ],
+        "KeySchema": [{"AttributeName": "id", "KeyType": "HASH"}],
+        "TableName" : "contact"
+      }
     }
   },
 
