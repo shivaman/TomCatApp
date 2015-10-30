@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: employee.war
-    destination: /usr/share/tomcat8/webapps/
+    destination: /usr/share/tomcat8/webapps/api/
   - source: common_functions.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: deregister_from_elb.sh
@@ -13,6 +13,10 @@ files:
     destination: /usr/share/tomcat8/webapps/hello-scripts/
   - source: stop_server.sh
     destination: /usr/share/tomcat8/webapps/hello-scripts/
+  - source: httpd.conf
+    destination: /etc/httpd/conf/
+  - source: server.xml
+    destination: usr/share/tomcat8/conf/
 hooks:
   BeforeInstall:
     - location: stop_server.sh
