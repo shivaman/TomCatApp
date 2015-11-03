@@ -36,4 +36,7 @@ curl -X PUT -H "Content-type:application/xml" --data "<contact>
 
 # list specific employee contact, in JSON format
 curl -H "Accept:application/json" http://<hostname>/employee/rest/contacts/fsmith
+
+# delete an employee contact
+curl -X DELETE http://<hostname>/employee/rest/contacts/fsmith
 ```
