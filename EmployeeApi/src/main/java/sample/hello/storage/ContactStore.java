@@ -38,6 +38,11 @@ public class ContactStore {
 		return store;
 	}
 	
+	public static void removeItem(Contact c) {
+		store.remove(c);
+		mapper.delete(c);
+	}
+	
 	public static void addItem(Contact c) {
 		store.put(c.getId(), c);
 		mapper.save(c);

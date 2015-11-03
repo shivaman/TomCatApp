@@ -54,30 +54,6 @@ public class ContactResource {
 		return putAndGetResponse(c);
 	}
 	
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Contact putContact(Contact c) {
-//		putAndGetResponse(c);	 
-//		 return c;
-//	}
-
-	//	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-//	public Response putContact(JAXBElement<Contact> jaxbContact) {
-//		Contact c = jaxbContact.getValue();
-//		System.out.println("====" + c.getId());
-//		return putAndGetResponse(c);
-//	}
-	
-//	@Consumes(MediaType.APPLICATION_XML)
-//	public Response putContact(JAXBElement<Contact> jaxbContact) {
-//		Contact c = jaxbContact.getValue();
-//		return putAndGetResponse(c);
-//	}
-	
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public Response putContact(Contact c) {
-//		return putAndGetResponse(c);
-//	}
-	
 	@PUT
 	public Response putContact(@Context HttpHeaders herders, byte[] in) {
 		Map<String,String> params = ParamUtil.parse(new String(in));
@@ -93,15 +69,16 @@ public class ContactResource {
 		} else {
 			res = Response.created(uriInfo.getAbsolutePath()).build();
 		}
-		//ContactStore.getStore().put(c.getId(), c);
+		
 		ContactStore.addItem(c);
 		return res;
 	}
 	
 	@DELETE
 	public void deleteContact() {
-		Contact c = ContactStore.getStore().remove(contact);
+		Contact c = ContactStore.getStore().get(contact);
 		if(c==null)
 			throw new NotFoundException("No such Contact.");
+		ContactStore.removeItem(c);
 	}
 }
