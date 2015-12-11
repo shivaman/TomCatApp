@@ -1,0 +1,181 @@
+{
+    "pipeline": {
+        "roleArn": "arn:aws:iam::329945376137:role/AWS-CodePipeline-Service", 
+        "stages": [
+            {
+                "name": "Source", 
+                "actions": [
+                    {
+                        "inputArtifacts": [], 
+                        "name": "Source", 
+                        "actionTypeId": {
+                            "category": "Source", 
+                            "owner": "ThirdParty", 
+                            "version": "1", 
+                            "provider": "GitHub"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "MyApp"
+                            }
+                        ], 
+                        "configuration": {
+                            "Owner": "shivaman", 
+                            "Repo": "HelloWorldRepo", 
+                            "Branch": "master", 
+                            "OAuthToken": "****"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }, 
+            {
+                "name": "Build", 
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "MyApp"
+                            }
+                        ], 
+                        "name": "Build", 
+                        "actionTypeId": {
+                            "category": "Build", 
+                            "owner": "Custom", 
+                            "version": "1", 
+                            "provider": "JenkinsBuilder"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "HelloWorld"
+                            }
+                        ], 
+                        "configuration": {
+                            "ProjectName": "HelloWorld"
+                        }, 
+                        "runOrder": 1
+                    }, 
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "MyApp"
+                            }
+                        ], 
+                        "name": "EmployeeApi", 
+                        "actionTypeId": {
+                            "category": "Build", 
+                            "owner": "Custom", 
+                            "version": "1", 
+                            "provider": "JenkinsBuilder"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "EmployeeApi"
+                            }
+                        ], 
+                        "configuration": {
+                            "ProjectName": "EmployeeAPI"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }, 
+            {
+                "name": "Beta", 
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "EmployeeApi"
+                            }
+                        ], 
+                        "name": "EmployeeApi", 
+                        "actionTypeId": {
+                            "category": "Deploy", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CodeDeploy"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "ApplicationName": "TestTom-TestTomCodeDeployApplication-WT9DTXBC1FC9", 
+                            "DeploymentGroupName": "TestTom-ApiDeploymentGroup-6ZSAZGZ4AH69"
+                        }, 
+                        "runOrder": 1
+                    }, 
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "HelloWorld"
+                            }
+                        ], 
+                        "name": "HelloWorld", 
+                        "actionTypeId": {
+                            "category": "Deploy", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CodeDeploy"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "ApplicationName": "TestTom-TestTomCodeDeployApplication-WT9DTXBC1FC9", 
+                            "DeploymentGroupName": "TestTom-WebDeploymentGroup-1C17UPU4DEQ4W"
+                        }, 
+                        "runOrder": 2
+                    }
+                ]
+            }, 
+            {
+                "name": "APITest", 
+                "actions": [
+                    {
+                        "inputArtifacts": [], 
+                        "name": "APITest", 
+                        "actionTypeId": {
+                            "category": "Test", 
+                            "owner": "ThirdParty", 
+                            "version": "1", 
+                            "provider": "Runscope"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "Bucket": "xug4qlw0qgh6", 
+                            "TestId": "c3e24117-540f-448a-9ac2-d9ee0135b70e", 
+                            "ClientId": "971342f1-c498-48f4-a97b-8a1ff3f6f6d3", 
+                            "ClientToken": "****"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }, 
+            {
+                "name": "PerformanceTest", 
+                "actions": [
+                    {
+                        "inputArtifacts": [], 
+                        "name": "BlazeTest", 
+                        "actionTypeId": {
+                            "category": "Test", 
+                            "owner": "ThirdParty", 
+                            "version": "1", 
+                            "provider": "BlazeMeter"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "TestId": "5065484", 
+                            "ClientId": "9ae225ab-6a06-4359-8bdc-b77ce4de61ce", 
+                            "ClientToken": "****"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }
+        ], 
+        "artifactStore": {
+            "type": "S3", 
+            "location": "codepipeline-us-east-1-37946432828"
+        }, 
+        "name": "CodePipelineDemo", 
+        "version": 8
+    }
+}
